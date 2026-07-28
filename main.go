@@ -47,4 +47,23 @@ func main() {
 	}
 	fmt.Println("データは正しく出力されました．")
 	fmt.Println("-----------------------------------------------------")
+
+	fmt.Println("-----------------------------------------------------")
+	fmt.Println("  モノクロ階調画像（pgm形式）出力ルーチン")
+	fmt.Println("-----------------------------------------------------")
+	fmt.Print("出力ファイル名 (*.pgm) : ")
+	sobelOutfile, _ := reader.ReadString('\n')
+	sobelOutfile = strings.TrimSpace(sobelOutfile)
+
+	out, err := utils.SobelFiltering(img)
+	if err != nil {
+		fmt.Println("エラー:", err)
+		os.Exit(1)
+	}
+	if err := pgm.Save(sobelOutfile, out); err != nil {
+		fmt.Println("エラー:", err)
+		os.Exit(1)
+	}
+	fmt.Println("データは正しく出力されました．")
+	fmt.Println("-----------------------------------------------------")
 }
